@@ -1,0 +1,412 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    transition: background-color 0.5s, color 0.5s;
+    margin: 0;
+    padding: 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+    background-image: url("stars.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.relay-button {
+    padding: 25px 50px;
+    font-size: 24px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 90%;
+    max-width: 400px;
+    font-weight: bold;
+    transition: all 0.3s;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.relay-button.on {
+    background-color: #4CAF50;
+}
+
+.relay-button.off {
+    background-color: #f44336;
+}
+
+.relay-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.uptime-display {
+    font-size: 16px;
+    padding: 12px;
+    margin: 8px 0;
+    width: 90%;
+    max-width: 350px;
+}
+
+.chart-container {
+    width: 95%;
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.theme-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.status-indicator {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+    width: 90%;
+    max-width: 350px;
+}
+
+.status-icon {
+    display: none;
+    font-size: 1.2em;
+}
+
+.status-icon.active {
+    display: block;
+}
+
+.status-indicator.online {
+    background: #4CAF5020;
+    color: #2e7d32;
+}
+
+.status-indicator.offline {
+    background: #f4433620;
+    color: #c62828;
+}
+
+#deviceStatusText {
+    font-weight: 500;
+}
+
+.dark-theme .status-indicator.online {
+    background: #4CAF5030;
+    color: #81C784;
+}
+
+.dark-theme .status-indicator.offline {
+    background: #f4433630;
+    color: #EF9A9A;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+        margin: 15px 0;
+    }
+
+    .relay-button {
+        padding: 20px 30px;
+        font-size: 20px;
+        max-width: 300px;
+    }
+
+    .uptime-display {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .theme-button {
+        bottom: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 360px) {
+    .theme-button {
+        bottom: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+    }
+
+    .uptime-display {
+        font-size: 13px;
+    }
+}
+
+/* Стили для графика */
+.chart-container canvas {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.chart-container {
+    background-color: transparent !important;
+}
+
+.dark-theme .chartjs-render-monitor text {
+    fill: #fff !important;
+}
+
+.light-theme .chartjs-render-monitor text {
+    fill: #000 !important;
+}
+
+.chartjs-tooltip {
+    background: rgba(0, 0, 0, 0.7) !important;
+    color: white !important;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.connection-button {
+    padding: 12px 24px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+
+.connection-button:hover {
+    background-color: #1976D2;
+}
+
+.connection-button:disabled {
+    background-color: #BBDEFB;
+    cursor: not-allowed;
+}
+
+.status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.status-indicator {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 8px 20px;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+/* Обновите стили кнопки */
+.relay-button {
+    margin-top: 20px;
+}
+/* Стили */
+.status-container {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    border-radius: 30px;
+    background: #f0f0f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.status-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+}
+
+.status-label {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #333;
+}
+
+.time-display {
+    display: grid;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.time-box {
+    background: rgba(240, 240, 240, 0.9);
+    padding: 18px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.time-box span {
+    display: block;
+    font-family: 'Courier New', monospace;
+}
+
+.time-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.time-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 8px;
+}
+
+.time-value small {
+    font-size: 0.6em;
+    color: #666;
+}
+
+/* Состояния статуса */
+.status-online .status-icon {
+    transform: rotate(360deg);
+    color: #2ecc71;
+}
+
+.status-online .status-label {
+    color: #27ae60;
+}
+
+.status-offline .status-icon {
+    color: #e74c3c;
+}
+
+.status-offline .status-label {
+    color: #c0392b;
+}
+
+.connection-button {
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+
+.connection-button:hover {
+    background-color: #2980b9;
+}
+
+.connection-button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+#statusText {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Анимация при изменении статуса */
+@keyframes status-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.status-online {
+    animation: status-pulse 0.5s ease;
+}
+
+.status-offline {
+    animation: status-pulse 0.5s ease;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Управление розеткой</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Управление розеткой</h1>
+        
+        <!-- Обновленный блок статуса -->
+        <div class="status-container">
+            <div class="status-display">
+                <div class="status-badge" id="statusText">
+                    <span class="status-icon">⌛</span>
+                    <span class="status-label">Проверка...</span>
+                </div>
+                <div class="time-display">
+                    <div class="time-box" id="currentSession"></div>
+                    <div class="time-box" id="totalTime"></div>
+                </div>
+            </div>
+        </div>
+
+        <button id="toggleRelay" class="relay-button off" disabled>Загрузка...</button>
+        <button id="checkConnectionBtn" class="connection-button">Проверить сейчас</button>
+        <div class="chart-container">
+            <canvas id="sessionsChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Кнопка переключения темы -->
+    <button id="themeToggle" class="theme-button">🌞</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
